@@ -15,7 +15,7 @@ from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def create_ref_code():
@@ -39,7 +39,7 @@ def is_valid_form(values):
 
 class CheckoutView(View):
     pass
-    
+
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
@@ -536,4 +536,4 @@ class RequestRefundView(View):
 
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist.")
-                return redirect("core:request-refund") 
+                return redirect("core:request-refund")
